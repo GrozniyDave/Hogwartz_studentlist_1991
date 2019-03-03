@@ -12,7 +12,8 @@ let mySelf = {
   lastname: "Turks",
   fullname: "Artjoms Turks",
   house: "Copenhagen",
-  id: "27"
+  id: "27",
+  blood: "The king of the pirates"
 };
 //global variables
 let jsonData;
@@ -27,11 +28,13 @@ let fullLast;
 let modal = document.querySelector("#simpleModal_5");
 let TrueLast;
 let squad = document.querySelector("#squadAdd");
+let selectedStudent;
 //initial function that calls json loading function
 function init() {
   document.querySelector("#list").addEventListener("click", clickList);
   loadJSONBlood();
 }
+
 //loads hogwartz students
 function loadJSON() {
   fetch("http://petlatkea.dk/2019/hogwarts/students.json")
@@ -41,6 +44,7 @@ function loadJSON() {
       prepareObjects(myJson);
     });
 }
+
 //loads blood json
 function loadJSONBlood() {
   fetch("http://petlatkea.dk/2019/hogwarts/families.json")
@@ -98,6 +102,7 @@ function clickList(event) {
     clickRemove();
   }
 }
+
 //remove function(expellling)
 function clickRemove() {
   let target = event.target.dataset.id;
@@ -107,16 +112,22 @@ function clickRemove() {
   arrFiltered.splice(indexToCut1, 1);
 
   if (target === "27") {
-    alert("You cannot do that");
+    alert("Ok,u're happy now?");
+    setTimeout(function() {
+      alert("But remember, I will follow you..");
+    }, 1500);
   }
   arrFiltered.push(mySelf);
+  arrFiltered.sort;
   displayStudent();
 }
+
 //displays student info in tbody html element
 function displayStudent() {
   //IMPORTANT to clear before cloning!
   document.querySelector("#list tbody").innerHTML = "";
   arrFiltered.forEach(studs => {
+    selectedStudent = student;
     //clone to html
     const clone = document
       .querySelector("template#student")
@@ -128,9 +139,13 @@ function displayStudent() {
     clone.querySelector(".Modallink").onclick = () => {
       displayModal(studs);
     };
+    clone
+      .querySelector("#squadAdd")
+      .addEventListener("click", () => addToInquisitorialSquad(studs));
     document.querySelector("#list tbody").appendChild(clone);
   });
 }
+
 //https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
@@ -139,6 +154,7 @@ function uuidv4() {
     return v.toString(16);
   });
 }
+
 //displays modal
 function displayModal(stud) {
   let spacebar = stud.lastname.indexOf(" ");
@@ -158,10 +174,12 @@ function displayModal(stud) {
   //shows modal on click
   modal.style.display = "block";
 }
+
 //close modal on click
 modal.addEventListener("click", () => {
   modal.style.display = "none";
 });
+
 //filters
 function filtering(house) {
   if (house === "all") {
@@ -171,6 +189,7 @@ function filtering(house) {
   }
   displayStudent();
 }
+
 //sorts
 function sorting(property) {
   arrFiltered = arrFiltered.sort(sortDesc);
@@ -181,7 +200,26 @@ function sorting(property) {
   }
   displayStudent();
 }
-// squad.addEventListener("click", addToSquad);
-// function addToSquad() {
-//   document.querySelector("#squadAdd").innerHTML = "";
+
+//adds students to IS
+function addToInquisitorialSquad(stud) {
+  if (stud.inSquad) {
+    alert("Student is already in the squad.");
+  } else {
+    if (stud.blood === "pure" || stud.house === "Slytherin") {
+      alert("You're in the squad ! Well done!");
+      //u can use it later - to know if student is in the squad
+      stud.inSquad = true;
+    } else {
+      alert("This student can't be in the squad!");
+    }
+  }
+}
+//removes from IS (unfortunately that's didnt work)
+// function removeFromInquisitorialSquad() {
+//   if (selectedStudent.inSquad) {
+//     alert("Student is removed from the squad.");
+//   } else {
+//     alert("Student does not belong to the squad so you can't remove him.");
+//   }
 // }

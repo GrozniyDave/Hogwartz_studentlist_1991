@@ -33,9 +33,15 @@ a {
 td,
 th {
   border-bottom: 1px solid #cdcdcd;
+  border-right: 1px solid #cdcdcd;
 }
 img {
   max-width: 100px;
+}
+.Modallink {
+  color: #333333;
+  background-color: #cdcdcd;
+  padding: 1px;
 }
 /*//////////////////////DDDRRROOPPDDDOOOWWNN*/
 /* Dropdown Button */
