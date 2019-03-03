@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Hogwartz startover</title>
+  </head>
+  <header>
+    <div class="headersort">
+      <div class="dropdown">
+        <button class="dropbtn">Sort by:</button>
+        <div class="dropdown-content">
+          <a href="#" class="sort-item">Name</a>
+          <a href="#">Lastname</a>
+          <a href="#">House</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Filter by:</button>
+        <div class="dropdown-content">
+          <a href="#" class="filter-item" onclick="filtering('all')">Show all</a>
+          <a href="#" class="filter-item1" onclick="filtering('Hufflepuff')">Hufflepuff</a>
+		    	<a href="#" class="filter-item2" onclick="filtering('Gryffindor')" >Gryffindor</a>
+			    <a href="#" class="filter-item3" onclick="filtering('Ravenclaw')">Ravenclaw</a>
+			    <a href="#" class="filter-item4" onclick="filtering('Slytherin')">Slytherin</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <body>
+    </div>
+    <table id="list">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>House</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- student template will be copied and inserted here -->
+      </tbody>
+    </table>
+
+    <template id="student">
+      <tr>
+        <td data-field="name">NAME</td>
+        <td data-field="last">LASTNAME</td>
+        <td data-field="house">HOUSE</td>
+        <td><a href="#" data-target="simpleModal_5" data-toggle="modal" class="link"
+          >More</a
+        ></td>
+        <td><a href="#" data-action="addsquad">Add to Inquisitiorial Squad</a></td>
+        <td><button data-action="remove">Expell</button></td>
+      </tr>
+      
+    </template>
+    <div id="simpleModal_5" class="modal">
+      <div class="modal-window">
+        <h1>Hairy Potter</h1>
+        <h2>HufflePuff</h2>
+        <h3>Image:</h3>
+        <h3>Flag image:</h3>
+        <img src="#" alt="" />
+        <h4>Blood type:</h4>
+      </div>
+    </div>
+    <script src="js.js"></script>
+  </body>
+</html>
