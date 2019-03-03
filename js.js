@@ -3,6 +3,8 @@
 window.addEventListener("DOMContentLoaded", init);
 //prototype declaration
 let StudentPrototype = {
+  firstname: "-firstname",
+  lastname: "-lastname",
   fullname: "-student-fullname-",
   house: "-house-"
 };
@@ -38,14 +40,19 @@ function prepareObjects(jsonData) {
     const studs = Object.create(StudentPrototype);
     studs.fullname = student.fullname;
     studs.house = student.house;
+    let spacebar = studs.fullname.indexOf(" ");
+
+    studs.lastname = studs.fullname.substring(spacebar, studs.fullname.length);
+    studs.firstname = studs.fullname.substring(0, spacebar);
     //push to array
     arrayStudents.push(studs);
     //puts unique id's to each student
     arrayStudents.forEach(item => {
       item.id = uuidv4();
     });
-    arrFiltered = arrayStudents;
   });
+  arrFiltered = arrayStudents;
+  console.log(arrFiltered);
   //IMPORTANT to not put it inside loop but after loop is finished!
   displayStudent(arrayStudents);
 }
@@ -69,17 +76,13 @@ function displayStudent() {
   //IMPORTANT to clear before cloning!
   document.querySelector("#list tbody").innerHTML = "";
   arrFiltered.forEach(studs => {
-    //divide firstname and lastname
-    spacebar = studs.fullname.indexOf(" ");
-    let fullLast = studs.fullname.substring(spacebar, studs.fullname.length);
-    let firstName = studs.fullname.substring(0, spacebar);
     //clone to html
     const clone = document
       .querySelector("template#student")
       .content.cloneNode(true);
-    clone.querySelector("[data-field=name]").textContent = firstName;
+    clone.querySelector("[data-field=name]").textContent = studs.firstname;
     clone.querySelector("[data-field=house]").textContent = studs.house;
-    clone.querySelector("[data-field=last]").textContent = fullLast;
+    clone.querySelector("[data-field=last]").textContent = studs.lastname;
     clone.querySelector("button").dataset.id = studs.id;
     document.querySelector("#list tbody").appendChild(clone);
   });
@@ -99,9 +102,7 @@ document.addEventListener(
   function(e) {
     e = e || window.event;
     let target = e.target || e.srcElement;
-
     e.preventDefault();
-
     if (
       target.hasAttribute("data-toggle") &&
       target.getAttribute("data-toggle") == "modal"
@@ -111,7 +112,6 @@ document.addEventListener(
         document.getElementById(m_ID).classList.add("open");
       }
     }
-
     // Close modal window with 'data-dismiss' attribute or when the backdrop is clicked
     if (
       (target.hasAttribute("data-dismiss") &&
@@ -131,8 +131,16 @@ function filtering(house) {
     arrFiltered = arrayStudents;
   } else {
     arrFiltered = arrayStudents.filter(elem => elem.house === house);
-    console.log(arrFiltered);
   }
+  displayStudent();
+}
 
+function sorting(property) {
+  arrFiltered = arrFiltered.sort(sortDesc);
+  function sortDesc(a, b) {
+    if (a[property] < b[property]) return -1;
+    if (a[property] > b[property]) return 1;
+    return 0;
+  }
   displayStudent();
 }

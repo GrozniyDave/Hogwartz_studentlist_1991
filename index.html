@@ -12,9 +12,8 @@
       <div class="dropdown">
         <button class="dropbtn">Sort by:</button>
         <div class="dropdown-content">
-          <a href="#" class="sort-item">Name</a>
-          <a href="#">Lastname</a>
-          <a href="#">House</a>
+          <a href="#" onclick="sorting('firstname')">Firstname</a>
+          <a href="#" onclick="sorting('lastname')">Lastname</a>
         </div>
       </div>
       <div class="dropdown">
@@ -53,18 +52,18 @@
         <td><a href="#" data-target="simpleModal_5" data-toggle="modal" class="link"
           >More</a
         ></td>
-        <td><a href="#" data-action="addsquad">Add to Inquisitiorial Squad</a></td>
+        <td><a href="#" data-action="addsquad">Add to IS</a></td>
         <td><button data-action="remove">Expell</button></td>
       </tr>
       
     </template>
     <div id="simpleModal_5" class="modal">
       <div class="modal-window">
-        <h1>Hairy Potter</h1>
-        <h2>HufflePuff</h2>
+        <h1>Name:</h1>
+        <h2>House: </h2>
         <h3>Image:</h3>
-        <h3>Flag image:</h3>
-        <img src="#" alt="" />
+        <img src="images/goldstein_a.png" alt="" />
+        <img src="flags/Ravenclaw.png" alt="">
         <h4>Blood type:</h4>
       </div>
     </div>

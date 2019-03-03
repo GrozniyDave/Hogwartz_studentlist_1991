@@ -26,6 +26,9 @@ td,
 th {
   border-bottom: 1px solid #cdcdcd;
 }
+img {
+  max-width: 70px;
+}
 /*//////////////////////DDDRRROOPPDDDOOOWWNN*/
 /* Dropdown Button */
 .dropbtn {
