@@ -37,7 +37,7 @@ function init() {
 
 //loads hogwartz students
 function loadJSON() {
-  fetch("http://petlatkea.dk/2019/hogwarts/students.json")
+  fetch("https://petlatkea.dk/2019/hogwarts/students.json")
     .then(response => response.json())
     .then(myJson => {
       jsonData = myJson;
