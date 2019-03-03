@@ -47,7 +47,7 @@ function loadJSON() {
 
 //loads blood json
 function loadJSONBlood() {
-  fetch("http://petlatkea.dk/2019/hogwarts/families.json")
+  fetch("https://petlatkea.dk/2019/hogwarts/families.json")
     .then(response => response.json())
     .then(myJsonBlood => {
       jsonDataBlood = myJsonBlood;
