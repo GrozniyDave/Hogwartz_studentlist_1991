@@ -1,5 +1,4 @@
 "use strict";
-
 window.addEventListener("DOMContentLoaded", init);
 //prototype declaration
 let StudentPrototype = {
@@ -8,7 +7,13 @@ let StudentPrototype = {
   fullname: "-student-fullname-",
   house: "-house-"
 };
-
+let mySelf = {
+  firstname: "Artjoms",
+  lastname: "Turks",
+  fullname: "Artjoms Turks",
+  house: "Copenhagen",
+  id: "27"
+};
 //global variables
 let jsonData;
 let jsonDataBlood;
@@ -21,16 +26,14 @@ let spacebar;
 let fullLast;
 let modal = document.querySelector("#simpleModal_5");
 let TrueLast;
-
+let squad = document.querySelector("#squadAdd");
 //initial function that calls json loading function
 function init() {
   document.querySelector("#list").addEventListener("click", clickList);
   loadJSONBlood();
 }
-
+//loads hogwartz students
 function loadJSON() {
-  /*fetches local json and cals function that creates array
-   of objects from json data*/
   fetch("http://petlatkea.dk/2019/hogwarts/students.json")
     .then(response => response.json())
     .then(myJson => {
@@ -38,7 +41,7 @@ function loadJSON() {
       prepareObjects(myJson);
     });
 }
-
+//loads blood json
 function loadJSONBlood() {
   fetch("http://petlatkea.dk/2019/hogwarts/families.json")
     .then(response => response.json())
@@ -74,7 +77,6 @@ function prepareObjects(jsonData) {
     } else {
       studs.blood = "muggle";
     }
-
     //push to array
     arrayStudents.push(studs);
     //puts unique id's to each student
@@ -82,6 +84,7 @@ function prepareObjects(jsonData) {
       item.id = uuidv4();
     });
   });
+  arrayStudents.push(mySelf);
   arrFiltered = arrayStudents;
   console.log(arrFiltered);
   //IMPORTANT to not put it inside loop but after loop is finished!
@@ -100,10 +103,13 @@ function clickRemove() {
   let target = event.target.dataset.id;
   let indexToCut = arrayStudents.findIndex(student => student.id === target);
   arrayStudents.splice(indexToCut, 1);
-
   let indexToCut1 = arrFiltered.findIndex(student => student.id === target);
   arrFiltered.splice(indexToCut1, 1);
 
+  if (target === "27") {
+    alert("You cannot do that");
+  }
+  arrFiltered.push(mySelf);
   displayStudent();
 }
 //displays student info in tbody html element
@@ -122,7 +128,6 @@ function displayStudent() {
     clone.querySelector(".Modallink").onclick = () => {
       displayModal(studs);
     };
-
     document.querySelector("#list tbody").appendChild(clone);
   });
 }
@@ -150,7 +155,6 @@ function displayModal(stud) {
     "flags/" + stud.house + ".png";
   document.querySelector("#simpleModal_5 > div > h4").textContent =
     "Blood type: " + stud.blood;
-
   //shows modal on click
   modal.style.display = "block";
 }
@@ -177,3 +181,7 @@ function sorting(property) {
   }
   displayStudent();
 }
+// squad.addEventListener("click", addToSquad);
+// function addToSquad() {
+//   document.querySelector("#squadAdd").innerHTML = "";
+// }

@@ -22,6 +22,14 @@ a {
   outline: 1px solid #cdcdcd;
   margin: 1px;
 }
+.infotable {
+  display: inline-flex;
+}
+#squad {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
 td,
 th {
   border-bottom: 1px solid #cdcdcd;
